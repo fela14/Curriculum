@@ -8,8 +8,19 @@ pipeline {
     }
 
     stage('Logs') {
-      steps {
-        bat 'echo Hello from Windows Batch'
+      parallel {
+        stage('Logs') {
+          steps {
+            bat 'echo Hello from Windows Batch'
+          }
+        }
+
+        stage('Front-End Unit Tests') {
+          steps {
+            bat 'cd curriculum-front && npm i && npm run test:unit'
+          }
+        }
+
       }
     }
 
