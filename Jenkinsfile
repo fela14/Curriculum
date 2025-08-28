@@ -7,9 +7,9 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('error') {
       steps {
-        sh 'ls -la'
+        bat 'bat \'echo Hello from Windows Batch!\' bat \'dir\''
       }
     }
 
