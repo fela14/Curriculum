@@ -7,9 +7,9 @@ pipeline {
       }
     }
 
-    stage('Logs') {
+    stage('Tests') {
       parallel {
-        stage('Logs') {
+        stage('Tests') {
           steps {
             bat 'echo Hello from Windows Batch'
           }
