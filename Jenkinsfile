@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'linux-agent' } // <-- runs all stages on your Linux agent
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // your Jenkins credentials ID
     }
@@ -33,7 +33,6 @@ pipeline {
 
         stage('Log into Dockerhub') {
             steps {
-                // DOCKERHUB_CREDENTIALS_USR and DOCKERHUB_CREDENTIALS_PSW
                 sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
             }
         }
