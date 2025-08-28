@@ -7,7 +7,7 @@ pipeline {
       }
     }
 
-    stage('error') {
+    stage('Logs') {
       steps {
         bat 'echo Hello from Windows Batch'
       }
