@@ -9,7 +9,7 @@ pipeline {
 
     stage('error') {
       steps {
-        bat 'bat \'echo Hello from Windows Batch!\' bat \'dir\''
+        bat 'echo Hello from Windows Batch'
       }
     }
 
