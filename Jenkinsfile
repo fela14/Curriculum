@@ -11,13 +11,13 @@ pipeline {
       parallel {
         stage('Tests') {
           steps {
-            bat 'echo Hello from Windows Batch'
+            sh 'echo Hello from Windows Batch'
           }
         }
 
         stage('Front-End Unit Tests') {
           steps {
-            bat 'cd curriculum-front && npm i && npm run test:unit'
+            sh 'cd curriculum-front && npm i && npm run test:unit'
           }
         }
 
@@ -26,7 +26,23 @@ pipeline {
 
     stage('Build') {
       steps {
-        bat 'docker build -f curriculum-front/Dockerfile .'
+        sh 'docker build -f curriculum-front/Dockerfile . -t fela14/curriculum-front:latest'
+      }
+    }
+
+    stage('Log into Dockerhub') {
+      environment {
+        DOCKERHUB_USERNAME = 'fela14'
+        DOCKERHUB_PASSWORD = 'Oluwaseun_60'
+      }
+      steps {
+        sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+      }
+    }
+
+    stage('Push') {
+      steps {
+        sh 'docker push fela14/curriculum-front:latest'
       }
     }
 
