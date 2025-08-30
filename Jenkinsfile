@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'linux-agent' } // <-- runs all stages on your Linux agent
+    agent { label 'linux-agent' } // runs all stages on your Linux agent
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhb') // your Jenkins credentials ID
     }
@@ -7,6 +7,14 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git(url: 'https://github.com/fela14/Curriculum.git', branch: 'main')
+            }
+        }
+
+        stage('Debug Front-End') {
+            steps {
+                dir('curriculum-front') {
+                    sh 'ls -R src/components'
+                }
             }
         }
 
@@ -19,7 +27,10 @@ pipeline {
                 }
                 stage('Front-End Unit Tests') {
                     steps {
-                        sh 'cd curriculum-front && npm i && npm run test:unit'
+                        dir('curriculum-front') {
+                            sh 'npm i'
+                            sh 'npm run test:unit'
+                        }
                     }
                 }
             }
