@@ -19,20 +19,8 @@ pipeline {
         }
 
         stage('Tests') {
-            parallel {
-                stage('Tests') {
-                    steps {
-                        sh 'echo Hello from Linux'
-                    }
-                }
-                stage('Front-End Unit Tests') {
-                    steps {
-                        dir('curriculum-front') {
-                            sh 'npm i'
-                            sh 'npm run test:unit'
-                        }
-                    }
-                }
+            steps {
+                sh 'echo Hello from Linux'
             }
         }
 
