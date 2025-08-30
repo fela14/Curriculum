@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'linux-agent' } // <-- runs all stages on your Linux agent
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // your Jenkins credentials ID
+        DOCKERHUB_CREDENTIALS = credentials('dockerhb') // your Jenkins credentials ID
     }
     stages {
         stage('Checkout Code') {
